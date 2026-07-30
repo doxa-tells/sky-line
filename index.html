@@ -75,8 +75,11 @@ header.solid .langs button{color:var(--muted)}
 /* мобильная сцена: короче скролл, компактнее оверлеи */
 @media(max-width:640px){
   #scrub{height:420vh}
-  #o1{padding-left:20px}
-  #o1 h1{letter-spacing:.05em}
+  /* заголовок — в верхнем левом углу, в чёрной зоне над кадром */
+  #o1{justify-content:flex-start;padding-left:20px;padding-top:max(13vh,86px)}
+  #o1 .kicker{font-size:10px;letter-spacing:.3em;margin-bottom:12px}
+  #o1 h1{letter-spacing:.05em;font-size:clamp(38px,12vw,52px)}
+  #o1 .sub{font-size:14px;margin-top:14px}
   #o2{justify-content:flex-end;padding-bottom:14vh;padding-right:20px}
   #o2 .card{gap:16px}
   #o2 .num b{font-size:32px}
