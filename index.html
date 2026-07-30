@@ -26,9 +26,16 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 h1,h2,h3{font-weight:700;letter-spacing:-.02em}
 
-/* ---------- ЛОАДЕР ---------- */
-#loader{position:fixed;inset:0;background:#111;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .8s ease,visibility .8s}
-#loader.hide{opacity:0;visibility:hidden}
+/* ---------- ЛОАДЕР (шторы) ---------- */
+#loader{position:fixed;inset:0;z-index:1000;pointer-events:none}
+#loader .pane{position:absolute;top:0;bottom:0;width:50.5%;background:#111;transition:transform 1.1s cubic-bezier(.77,0,.18,1)}
+#loader .pane.l{left:0}
+#loader .pane.r{right:0}
+#loader .linner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .45s ease}
+#loader.hide .pane.l{transform:translateX(-101%)}
+#loader.hide .pane.r{transform:translateX(101%)}
+#loader.hide .linner{opacity:0}
+#loader.hide{visibility:hidden;transition:visibility 0s 1.2s}
 #loader .logo{color:#fff;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:.35em;text-indent:.35em}
 #loader .bar{width:min(280px,60vw);height:2px;background:rgba(255,255,255,.15);overflow:hidden;border-radius:2px}
 #loader .bar i{display:block;height:100%;width:0%;background:var(--accent);transition:width .2s}
@@ -137,6 +144,12 @@ h2.title{font-size:clamp(30px,4.4vw,54px);line-height:1.08;margin-bottom:22px}
 .doc .ok{width:26px;height:26px;flex:none;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
 .doc .ok svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 
+/* локация / карта */
+.map-shell{margin-top:52px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(20,20,25,.18)}
+#dgmap{width:100%;height:clamp(320px,55vh,520px);background:var(--soft)}
+.map-link{display:inline-block;margin-top:18px;font-weight:700;color:var(--accent-dark);font-size:14.5px}
+.map-link:hover{text-decoration:underline}
+
 /* CTA */
 #cta{text-align:center}
 #cta .phone{font-size:clamp(24px,3.6vw,44px);font-weight:800;letter-spacing:.02em;margin:26px 0 8px;display:inline-block}
@@ -158,9 +171,13 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
 <body>
 
 <div id="loader">
-  <div class="logo">SKYLINE</div>
-  <div class="bar"><i id="lbar"></i></div>
-  <div class="pct" id="lpct">0%</div>
+  <div class="pane l"></div>
+  <div class="pane r"></div>
+  <div class="linner">
+    <div class="logo">SKYLINE</div>
+    <div class="bar"><i id="lbar"></i></div>
+    <div class="pct" id="lpct">0%</div>
+  </div>
 </div>
 
 <header id="hdr">
@@ -194,7 +211,7 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
       <div class="card">
         <div class="num"><b>8</b><span data-i18n="st_houses">таунхаусов</span></div>
         <div class="num"><b>272 <small>м²</small></b><span data-i18n="st_area">площадь дома</span></div>
-        <div class="num"><b data-i18n-html="st_price_v">от 200 000 <small>₸/м²</small></b><span data-i18n="st_price">цена за квадрат</span></div>
+        <div class="num"><b data-i18n-html="st_price_v">от 700 000 <small>₸/м²</small></b><span data-i18n="st_price">цена за квадрат</span></div>
       </div>
     </div>
   </div>
@@ -221,7 +238,7 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
       <div class="s"><b>272 <small>м²</small></b><span data-i18n="st_area">площадь дома</span></div>
       <div class="s"><b>25 <small data-i18n="st_are_u">соток</small></b><span data-i18n="st_land">земельный участок</span></div>
       <div class="s"><b>10×10 <small>м</small></b><span data-i18n="st_yard">задний двор</span></div>
-      <div class="s"><b data-i18n-html="st_price_v">от 200 000 <small>₸/м²</small></b><span data-i18n="st_price">цена за квадрат</span></div>
+      <div class="s"><b data-i18n-html="st_price_v">от 700 000 <small>₸/м²</small></b><span data-i18n="st_price">цена за квадрат</span></div>
     </div>
   </div>
 </section>
@@ -279,6 +296,18 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
   </div>
 </section>
 
+<!-- ================= ЛОКАЦИЯ / 2ГИС ================= -->
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-i18n="l_eyebrow">Локация</div>
+    <h2 class="title reveal d1" data-i18n="l_title">Где находится SkyLine</h2>
+    <div class="map-shell reveal d2">
+      <div id="dgmap"></div>
+    </div>
+    <a class="map-link reveal d3" href="https://2gis.kz/almaty?m=76.962609%2C43.201806%2F17" target="_blank" rel="noopener" data-i18n="l_open">Открыть в 2ГИС →</a>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 <section class="block" id="cta">
   <div class="wrap">
@@ -318,7 +347,7 @@ function waLink(lang){return 'https://wa.me/77010444949?text='+encodeURIComponen
 const I18N = {
 ru:{
   hdr_wa:'Оставить заявку', kicker:'Клубный городок таунхаусов', sub:'Жизнь над городом — с видом на горы', scroll:'Листайте',
-  st_houses:'таунхаусов', st_area:'площадь дома', st_price:'цена за квадрат', st_price_v:'от 200 000 <small>₸/м²</small>',
+  st_houses:'таунхаусов', st_area:'площадь дома', st_price:'цена за квадрат', st_price_v:'от 700 000 <small>₸/м²</small>',
   st_land:'земельный участок', st_are_u:'соток', st_yard:'задний двор',
   cin_tag:'Видеообзор проекта',
   ab_eyebrow:'О проекте', ab_title:'Восемь домов. Одна улица.<br>Ваша высота.',
@@ -337,6 +366,7 @@ ru:{
   d_eyebrow:'Надёжность', d_title:'Вся разрешительная документация получена',
   d_lead:'Проект полностью легален: целевое назначение участка — дома блокированного типа, ПДП соответствует (зона G3).',
   dc1:'АПЗ получено', dc2:'Эскизный проект утверждён', dc3:'Экспертиза пройдена', dc4:'Градсовет пройден', dc5:'Соответствие ПДП (G3)',
+  l_eyebrow:'Локация', l_title:'Где находится SkyLine', l_open:'Открыть в 2ГИС →',
   c_eyebrow:'Контакты', c_title:'Выберите свой дом в SkyLine',
   c_lead:'Осталось всего 8 таунхаусов. Напишите нам в WhatsApp — пришлём планировки, цены и условия покупки.',
   c_note:'WhatsApp · ежедневно с 9:00 до 21:00', c_btn:'Написать в WhatsApp',
@@ -344,7 +374,7 @@ ru:{
 },
 kz:{
   hdr_wa:'Өтінім қалдыру', kicker:'Клубтық таунхаус қалашығы', sub:'Қала үстіндегі өмір — тау көрінісімен', scroll:'Парақтаңыз',
-  st_houses:'таунхаус', st_area:'үй ауданы', st_price:'шаршы метр бағасы', st_price_v:'200 000 <small>₸/м²</small>-ден',
+  st_houses:'таунхаус', st_area:'үй ауданы', st_price:'шаршы метр бағасы', st_price_v:'700 000 <small>₸/м²</small>-ден',
   st_land:'жер телімі', st_are_u:'сотық', st_yard:'артқы аула',
   cin_tag:'Жобаның бейнешолуы',
   ab_eyebrow:'Жоба туралы', ab_title:'Сегіз үй. Бір көше.<br>Сіздің биігіңіз.',
@@ -363,6 +393,7 @@ kz:{
   d_eyebrow:'Сенімділік', d_title:'Барлық рұқсат құжаттамасы алынған',
   d_lead:'Жоба толық заңды: телімнің мақсатты пайдаланылуы — блокталған үлгідегі үйлер, ЕЖЖ сәйкес (G3 аймағы).',
   dc1:'СЖТ (АПЗ) алынған', dc2:'Эскиздік жоба бекітілген', dc3:'Сараптамадан өткен', dc4:'Қала құрылысы кеңесінен өткен', dc5:'ЕЖЖ сәйкестігі (G3)',
+  l_eyebrow:'Орналасқан жері', l_title:'SkyLine қайда орналасқан', l_open:'2ГИС-те ашу →',
   c_eyebrow:'Байланыс', c_title:'SkyLine-нан өз үйіңізді таңдаңыз',
   c_lead:'Небәрі 8 таунхаус қалды. WhatsApp-қа жазыңыз — жоспарларды, бағаларды және сатып алу шарттарын жібереміз.',
   c_note:'WhatsApp · күн сайын 9:00–21:00', c_btn:'WhatsApp-қа жазу',
@@ -370,7 +401,7 @@ kz:{
 },
 en:{
   hdr_wa:'Enquire now', kicker:'A private townhouse village', sub:'Life above the city — with mountain views', scroll:'Scroll',
-  st_houses:'townhouses', st_area:'home area', st_price:'price per m²', st_price_v:'from 200,000 <small>₸/m²</small>',
+  st_houses:'townhouses', st_area:'home area', st_price:'price per m²', st_price_v:'from 700,000 <small>₸/m²</small>',
   st_land:'land plot', st_are_u:'ares', st_yard:'backyard',
   cin_tag:'Project video tour',
   ab_eyebrow:'About', ab_title:'Eight homes. One street.<br>Your altitude.',
@@ -389,6 +420,7 @@ en:{
   d_eyebrow:'Reliability', d_title:'All permits and approvals in place',
   d_lead:'The project is fully compliant: the plot is zoned for terraced housing and matches the detailed plan (zone G3).',
   dc1:'Architectural brief (APZ) issued', dc2:'Concept design approved', dc3:'State expertise passed', dc4:'Urban council passed', dc5:'Detailed plan compliance (G3)',
+  l_eyebrow:'Location', l_title:'Where SkyLine is', l_open:'Open in 2GIS →',
   c_eyebrow:'Contact', c_title:'Choose your home at SkyLine',
   c_lead:'Only 8 townhouses. Message us on WhatsApp — we will send floor plans, prices and purchase terms.',
   c_note:'WhatsApp · daily 9:00–21:00', c_btn:'Message on WhatsApp',
@@ -409,7 +441,7 @@ document.getElementById('langs').addEventListener('click',e=>{if(e.target.datase
 setLang('ru');
 
 /* ============ КАДРОВАЯ SCROLL-АНИМАЦИЯ ============ */
-const A_COUNT=61, B_COUNT=37, TOTAL=A_COUNT+B_COUNT;
+const A_COUNT=121, B_COUNT=73, TOTAL=A_COUNT+B_COUNT;
 /* на мобильных грузим облегчённые кадры 720px */
 const SMALL=Math.min(screen.width,innerWidth)<=820;
 const SEQ_DIR=SMALL?'assets/seq-sm/':'assets/seq/';
@@ -479,11 +511,15 @@ function progress(){
 }
 const o1=document.getElementById('o1'), o2=document.getElementById('o2');
 function fade(el,op,ty){el.style.opacity=op;el.style.transform='translateY('+(ty||0)+'px)';}
+let smooth=0;
 function render(force){
   if(!ready)return;
   const p=progress();
-  const want=Math.min(TOTAL-1,Math.floor(p*(TOTAL-1)));
-  const idx=nearest(want); /* если кадр ещё не догрузился — рисуем ближайший готовый */
+  /* плавная интерполяция индекса кадра — без рывков при быстром скролле */
+  const want=p*(TOTAL-1);
+  smooth+=(want-smooth)*0.2;
+  if(Math.abs(want-smooth)<0.4)smooth=want;
+  const idx=nearest(Math.max(0,Math.min(TOTAL-1,Math.round(smooth))));
   if(idx>=0&&(idx!==curIdx||force)){curIdx=idx;drawFrame(frames[idx]);}
   /* оверлей 1: название — виден в начале */
   const p1=p<.06?1:Math.max(0,1-(p-.06)/.09);
@@ -495,8 +531,7 @@ function render(force){
   else if(p>=.70&&p<.80)p2=1-(p-.70)/.10;
   fade(o2,p2,(1-p2)*40);
 }
-let ticking=false;
-addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{render();ticking=false;});}},{passive:true});
+(function loop(){render();requestAnimationFrame(loop);})();
 addEventListener('resize',resize);
 preload();
 
@@ -512,6 +547,22 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cf=document.getElementById('cinemaFrame');
 new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cf.classList.add('on');}}),{threshold:.25}).observe(cf);
+
+/* ============ КАРТА 2ГИС (ленивая загрузка) ============ */
+const GEO=[43.201806,76.962609];
+let mapInited=false;
+function initMap(){
+  if(mapInited)return; mapInited=true;
+  const s=document.createElement('script');
+  s.src='https://maps.api.2gis.ru/2.0/loader.js';
+  s.onload=()=>{DG.then(()=>{
+    const m=DG.map('dgmap',{center:GEO,zoom:16,fullscreenControl:false,scrollWheelZoom:false});
+    DG.marker(GEO).addTo(m).bindPopup('SkyLine');
+  });};
+  document.body.appendChild(s);
+}
+new IntersectionObserver((es,obs)=>es.forEach(e=>{if(e.isIntersecting){initMap();obs.disconnect();}}),{rootMargin:'400px'})
+  .observe(document.getElementById('location'));
 </script>
 </body>
 </html>
