@@ -67,6 +67,9 @@ header.solid .langs button{color:var(--muted)}
 #o1 .kicker{color:#fff;opacity:.75;font-size:clamp(11px,1.3vw,14px);letter-spacing:.45em;font-weight:600;margin-bottom:18px;text-transform:uppercase}
 #o1 h1{color:#fff;font-family:'Playfair Display','Times New Roman',Georgia,serif;font-size:clamp(44px,7.5vw,104px);font-weight:600;letter-spacing:.08em;line-height:1;text-shadow:0 6px 40px rgba(0,0,0,.35)}
 #o1 .sub{color:#fff;opacity:.85;font-weight:400;font-size:clamp(14px,1.8vw,21px);margin-top:20px;letter-spacing:.04em;max-width:640px}
+#o1 .byline{display:inline-flex;align-items:center;gap:8px;margin-top:26px;color:#fff;opacity:.7;font-size:13px;letter-spacing:.12em;font-weight:600;pointer-events:auto;transition:opacity .3s}
+#o1 .byline:hover{opacity:1}
+#o1 .byline svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6}
 #o1 .hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:#fff;opacity:.6;font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
 #o1 .hint .wheel{width:22px;height:36px;border:2px solid rgba(255,255,255,.6);border-radius:12px;position:relative}
 #o1 .hint .wheel::after{content:'';position:absolute;top:6px;left:50%;width:3px;height:8px;margin-left:-1.5px;border-radius:3px;background:#fff;animation:sc 1.6s infinite}
@@ -159,9 +162,15 @@ h2.title{font-size:clamp(30px,4.4vw,54px);line-height:1.08;margin-bottom:22px}
 .big-wa{display:inline-flex;align-items:center;gap:12px;background:var(--wa);color:#fff;font-weight:800;font-size:clamp(15px,1.8vw,19px);padding:20px 44px;border-radius:99px;transition:transform .25s,box-shadow .25s}
 .big-wa:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 44px rgba(37,211,102,.4)}
 .big-wa svg{width:22px;height:22px;fill:#fff}
+.big-ig{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-weight:700;font-size:15px;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:14px 28px;transition:border-color .25s,transform .25s}
+.big-ig:hover{border-color:var(--accent);transform:translateY(-2px);color:var(--accent-dark)}
+.big-ig svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7}
 
 footer{border-top:1px solid var(--line);padding:34px clamp(20px,6vw,72px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:13px}
 footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
+footer .fsoc{display:flex;gap:10px;align-items:center}
+footer .fsoc a{font-weight:600;color:var(--muted)}
+footer .fsoc a:hover{color:var(--accent-dark)}
 
 /* плавающая кнопка WA на мобиле */
 #fab{position:fixed;right:18px;bottom:18px;z-index:800;width:56px;height:56px;border-radius:50%;background:var(--wa);display:none;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(37,211,102,.45)}
@@ -205,6 +214,10 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
       <div class="kicker" data-i18n="kicker">Клубный городок таунхаусов</div>
       <h1>SKYLINE</h1>
       <div class="sub" data-i18n="sub">Жизнь над городом — с видом на горы</div>
+      <a class="byline" href="https://www.instagram.com/rama.stroit?igsh=MWdqbWllaHpmbTJ1OA==" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+        by rama.stroit
+      </a>
       <div class="hint"><div class="wheel"></div><span data-i18n="scroll">Листайте</span></div>
     </div>
 
@@ -316,12 +329,18 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
     <h2 class="title reveal d1" data-i18n="c_title">Выберите свой дом в SkyLine</h2>
     <p class="lead reveal d2" style="margin:0 auto" data-i18n="c_lead">Осталось всего 8 таунхаусов. Напишите нам в WhatsApp — пришлём планировки, цены и условия покупки.</p>
     <div class="reveal d3">
-      <a class="phone" href="tel:+77010444949">+7 701 044 4949</a>
+      <a class="phone" href="tel:+77085000999">+7 708 500 0999</a>
       <div class="note" data-i18n="c_note">WhatsApp · ежедневно с 9:00 до 21:00</div>
       <a class="big-wa" id="waBig" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.4 4.4-9.8 9.9-9.8 5.4 0 9.8 4.4 9.8 9.8s-4.4 9.8-9.8 9.8zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.7-.4z"/></svg>
         <span data-i18n="c_btn">Написать в WhatsApp</span>
       </a>
+      <div>
+        <a class="big-ig" href="https://www.instagram.com/zhk_skyline?igsh=MWpyNXhsdDJrODhobw==" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          @zhk_skyline
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -329,6 +348,11 @@ footer .brand{font-weight:800;letter-spacing:.25em;color:var(--ink)}
 <footer>
   <div class="brand">SKYLINE</div>
   <div data-i18n="ft">© 2026 SkyLine. Клубный городок таунхаусов.</div>
+  <div class="fsoc">
+    <a href="https://www.instagram.com/zhk_skyline?igsh=MWpyNXhsdDJrODhobw==" target="_blank" rel="noopener">@zhk_skyline</a>
+    <span>·</span>
+    <a href="https://www.instagram.com/rama.stroit?igsh=MWdqbWllaHpmbTJ1OA==" target="_blank" rel="noopener">by rama.stroit</a>
+  </div>
 </footer>
 
 <a id="fab" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -342,7 +366,7 @@ const WA_MSGS = {
   kz:'Сәлеметсіз бе! SkyLine таунхаусы қызықтырады. Жоспарлар мен бағаларды жіберіңізші.',
   en:'Hello! I am interested in a SkyLine townhouse. Please send floor plans and prices.'
 };
-function waLink(lang){return 'https://wa.me/77010444949?text='+encodeURIComponent(WA_MSGS[lang]||WA_MSGS.ru);}
+function waLink(lang){return 'https://wa.me/77085000999?text='+encodeURIComponent(WA_MSGS[lang]||WA_MSGS.ru);}
 
 /* ============ I18N ============ */
 const I18N = {
