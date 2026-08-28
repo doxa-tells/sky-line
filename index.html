@@ -170,6 +170,17 @@ h2.title{font-size:clamp(30px,4.4vw,54px);line-height:1.08;margin-bottom:22px}
 
 /* CTA */
 #cta{text-align:center}
+.lead-form{display:flex;gap:12px;max-width:680px;margin:38px auto 0;justify-content:center;flex-wrap:wrap}
+.lead-form input{flex:1 1 180px;min-width:0;padding:15px 22px;border:1px solid var(--line);border-radius:99px;font:500 15px 'Manrope';color:var(--ink);background:#fff;outline:none;transition:border-color .25s}
+.lead-form input:focus{border-color:var(--accent)}
+.lead-form input.err{border-color:#d9534f}
+.lead-form button{flex:0 0 auto;border:0;cursor:pointer;background:var(--accent);color:#fff;font:800 15px 'Manrope';padding:15px 32px;border-radius:99px;transition:background .25s,transform .25s}
+.lead-form button:hover{background:var(--accent-dark);transform:translateY(-2px)}
+.lead-form button:disabled{opacity:.6;cursor:wait;transform:none}
+.lf-msg{margin-top:14px;font-size:14px;font-weight:600;min-height:20px}
+.lf-msg.ok{color:#2e9e5b}
+.lf-msg.fail{color:#d9534f}
+@media(max-width:560px){.lead-form{flex-direction:column}.lead-form button{width:100%}}
 #cta .phone{font-size:clamp(24px,3.6vw,44px);font-weight:800;letter-spacing:.02em;margin:26px 0 8px;display:inline-block}
 #cta .phone:hover{color:var(--accent-dark)}
 #cta .note{color:var(--muted);font-size:14px;margin-bottom:36px}
@@ -345,6 +356,14 @@ src="https://www.facebook.com/tr?id=937855995276539&ev=PageView&noscript=1"
     <div class="eyebrow reveal" data-i18n="c_eyebrow">Контакты</div>
     <h2 class="title reveal d1" data-i18n="c_title">Выберите свой дом в SkyLine</h2>
     <p class="lead reveal d2" style="margin:0 auto" data-i18n="c_lead">Осталось всего 8 таунхаусов. Напишите нам в WhatsApp — пришлём планировки, цены и условия покупки.</p>
+
+    <form id="leadForm" class="lead-form reveal d2" novalidate>
+      <input type="text" name="name" id="lfName" required data-i18n-ph="lf_name" placeholder="Ваше имя">
+      <input type="tel" name="phone" id="lfPhone" required data-i18n-ph="lf_phone" placeholder="+7 ___ ___ __ __">
+      <button type="submit" id="lfBtn"><span data-i18n="lf_send">Оставить заявку</span></button>
+    </form>
+    <div class="lf-msg" id="lfMsg"></div>
+
     <div class="reveal d3">
       <a class="phone" href="tel:+77085000999">+7 708 500 0999</a>
       <div class="note" data-i18n="c_note">WhatsApp · ежедневно с 9:00 до 21:00</div>
@@ -411,6 +430,7 @@ ru:{
   l_eyebrow:'Локация', l_title:'Где находится SkyLine', l_open:'Открыть в 2ГИС →',
   c_eyebrow:'Контакты', c_title:'Выберите свой дом в SkyLine',
   c_lead:'Осталось всего 8 таунхаусов. Напишите нам в WhatsApp — пришлём планировки, цены и условия покупки.',
+  lf_name:'Ваше имя', lf_phone:'+7 ___ ___ __ __', lf_send:'Оставить заявку', lf_ok:'Спасибо! Заявка отправлена — скоро свяжемся.', lf_fail:'Не получилось отправить. Позвоните или напишите в WhatsApp.',
   c_note:'WhatsApp · ежедневно с 9:00 до 21:00', c_btn:'Написать в WhatsApp',
   ft:'© 2026 SkyLine. Клубный городок таунхаусов.'
 },
@@ -438,6 +458,7 @@ kz:{
   l_eyebrow:'Орналасқан жері', l_title:'SkyLine қайда орналасқан', l_open:'2ГИС-те ашу →',
   c_eyebrow:'Байланыс', c_title:'SkyLine-нан өз үйіңізді таңдаңыз',
   c_lead:'Небәрі 8 таунхаус қалды. WhatsApp-қа жазыңыз — жоспарларды, бағаларды және сатып алу шарттарын жібереміз.',
+  lf_name:'Есіміңіз', lf_phone:'+7 ___ ___ __ __', lf_send:'Өтінім қалдыру', lf_ok:'Рақмет! Өтінім жіберілді — жақын арада хабарласамыз.', lf_fail:'Жіберілмеді. Қоңырау шалыңыз немесе WhatsApp-қа жазыңыз.',
   c_note:'WhatsApp · күн сайын 9:00–21:00', c_btn:'WhatsApp-қа жазу',
   ft:'© 2026 SkyLine. Клубтық таунхаус қалашығы.'
 },
@@ -465,6 +486,7 @@ en:{
   l_eyebrow:'Location', l_title:'Where SkyLine is', l_open:'Open in 2GIS →',
   c_eyebrow:'Contact', c_title:'Choose your home at SkyLine',
   c_lead:'Only 8 townhouses. Message us on WhatsApp — we will send floor plans, prices and purchase terms.',
+  lf_name:'Your name', lf_phone:'+7 ___ ___ __ __', lf_send:'Send request', lf_ok:'Thank you! We will contact you shortly.', lf_fail:'Could not send. Please call or message us on WhatsApp.',
   c_note:'WhatsApp · daily 9:00–21:00', c_btn:'Message on WhatsApp',
   ft:'© 2026 SkyLine. A private townhouse village.'
 }};
@@ -474,6 +496,7 @@ function setLang(l){
   LANG=l; document.documentElement.lang=l==='kz'?'kk':l;
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(I18N[l][k])el.innerHTML=I18N[l][k];});
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.dataset.i18nHtml;if(I18N[l][k])el.innerHTML=I18N[l][k];});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const k=el.dataset.i18nPh;if(I18N[l][k])el.placeholder=I18N[l][k];});
   document.querySelectorAll('#langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
   document.getElementById('waTop').href=waLink(l);
   document.getElementById('waBig').href=waLink(l);
@@ -589,6 +612,37 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const cf=document.getElementById('cinemaFrame');
 new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cf.classList.add('on');}}),{threshold:.25}).observe(cf);
+
+/* ============ ЛИД-ФОРМА → Google Sheets + Telegram ============ */
+/* После настройки Apps Script вставьте сюда URL веб-приложения (см. LEAD-FORM-SETUP.md) */
+const LEAD_ENDPOINT='';
+
+const lf=document.getElementById('leadForm'), lfMsg=document.getElementById('lfMsg');
+lf.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const nameEl=document.getElementById('lfName'), phoneEl=document.getElementById('lfPhone');
+  const name=nameEl.value.trim(), phone=phoneEl.value.replace(/[^\d+]/g,'');
+  nameEl.classList.toggle('err',!name); phoneEl.classList.toggle('err',phone.length<10);
+  if(!name||phone.length<10)return;
+  const btn=document.getElementById('lfBtn'); btn.disabled=true;
+  lfMsg.className='lf-msg'; lfMsg.textContent='';
+  try{
+    if(LEAD_ENDPOINT){
+      await fetch(LEAD_ENDPOINT,{method:'POST',mode:'no-cors',
+        body:new URLSearchParams({name,phone,lang:LANG,page:location.href})});
+    }else{
+      /* пока бэкенд не настроен — заявка уходит в WhatsApp */
+      open('https://wa.me/77085000999?text='+encodeURIComponent('Заявка с сайта SkyLine\nИмя: '+name+'\nТелефон: '+phone),'_blank');
+    }
+    lf.reset(); lfMsg.classList.add('ok');
+    lfMsg.textContent=I18N[LANG].lf_ok;
+    if(window.fbq)fbq('track','Lead');
+  }catch(err){
+    lfMsg.classList.add('fail');
+    lfMsg.textContent=I18N[LANG].lf_fail;
+  }
+  btn.disabled=false;
+});
 
 /* ============ META PIXEL: события конверсии ============ */
 ['waTop','waBig','fab'].forEach(id=>{
