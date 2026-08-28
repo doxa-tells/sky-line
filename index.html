@@ -226,8 +226,8 @@ src="https://www.facebook.com/tr?id=937855995276539&ev=PageView&noscript=1"
       <button data-lang="kz">KZ</button>
       <button data-lang="en">EN</button>
     </div>
-    <a class="hwa" id="waTop" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.4 4.4-9.8 9.9-9.8 5.4 0 9.8 4.4 9.8 9.8s-4.4 9.8-9.8 9.8zm5.4-7.3c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.7-.4z"/></svg>
+    <a class="hwa" id="waTop" href="#cta">
+      <svg viewBox="0 0 24 24" style="fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
       <span data-i18n="hdr_wa">Оставить заявку</span>
     </a>
   </div>
@@ -498,7 +498,6 @@ function setLang(l){
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.dataset.i18nHtml;if(I18N[l][k])el.innerHTML=I18N[l][k];});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const k=el.dataset.i18nPh;if(I18N[l][k])el.placeholder=I18N[l][k];});
   document.querySelectorAll('#langs button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
-  document.getElementById('waTop').href=waLink(l);
   document.getElementById('waBig').href=waLink(l);
   document.getElementById('fab').href=waLink(l);
 }
@@ -645,7 +644,7 @@ lf.addEventListener('submit',async e=>{
 });
 
 /* ============ META PIXEL: события конверсии ============ */
-['waTop','waBig','fab'].forEach(id=>{
+['waBig','fab'].forEach(id=>{
   document.getElementById(id).addEventListener('click',()=>{
     if(window.fbq)fbq('track','Contact');
   });
